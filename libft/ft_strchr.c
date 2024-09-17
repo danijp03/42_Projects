@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 17:51:12 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/17 19:48:39 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/09/17 21:34:08 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(int c)
-{
-	unsigned char	ch;
+#include <string.h>
 
-	ch = c;
-	if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z')
-		|| (ch >= 'A' && ch <= 'Z'))
-		return (1);
-	else
-		return (0);
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s != '\0')
+	{
+		if (*s == c)
+			return ((char *)s);
+		s++;
+	}
+	return (NULL);
 }

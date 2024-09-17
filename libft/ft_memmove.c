@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 19:43:45 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/17 19:39:54 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/17 20:18:26 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/09/17 20:37:09 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-void	*ft_memset(char *s, int c, unsigned int n)
-{
-	unsigned int	i;
-	unsigned char	ch;
 
-	ch = c;
+#include <string.h>
+
+void	*ft_memmove(char *dest, const char *src, size_t n)
+{
+	char	*tmp;
+	size_t	i;
+
+	tmp = dest;
 	i = 0;
-	while (i < n && s[i] != '\0')
+	while (i < n && src[i] != '\0')
 	{
-		s[i] = c;
+		tmp[i] = src[i];
 		i++;
 	}
-	while (s[i] != '\0')
+	i = 0;
+	while (i < n)
+	{
+		dest[i] = tmp[i];
 		i++;
-	s[i] = '\0';
-	return (s);
+	}
+	return (dest);
 }
