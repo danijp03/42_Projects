@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/26 22:58:01 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/23 20:48:04 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/09/27 17:04:02 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include <stdlib.h>
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	while (*s != '\0')
+	void	*arr;
+	size_t	i;
+
+	i = 0;
+	if (nmemb == 0 || size == 0)
+		return (NULL);
+	if ((int)nmemb * (int)size > 2147483647)
+		return (NULL);
+	arr = malloc(nmemb * size);
+	if (arr == NULL)
+		return (NULL);
+	while (i < nmemb)
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		((unsigned char *)arr)[i] = 0;
+		i++;
 	}
-	if (c == '\0')
-		return ((char *)s);
-	return (NULL);
+	return (arr);
 }

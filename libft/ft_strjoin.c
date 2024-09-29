@@ -1,47 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 20:51:38 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/26 22:42:38 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/23 21:27:11 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/09/23 21:44:13 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <stdlib.h>
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(char const *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 		i++;
 	return (i);
 }
 
-size_t	ft_strlcat(char	*dst, const char *src, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
-	size_t	j;
-	size_t	dst_len;
-	size_t	src_len;
+	char	*str;
+	int		i;
 
 	i = 0;
-	j = 0;
-	src_len = ft_strlen(src);
-	dst_len = ft_strlen(dst);
-	if (size <= dst_len)
-		return (size + src_len);
-	i = dst_len;
-	while (i < (size - 1) && src[j] != '\0')
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(char));
+	if (str == NULL)
 	{
-		dst[i] = src[j];
-		i++;
-		j++;
+		str = malloc(1);
+		return (str);
 	}
-	dst[i] = '\0';
-	return (dst_len + src_len);
+	while (*s1 != '\0')
+	{
+		str[i] = *s1;
+		i++;
+		s1++;
+	}
+	while (*s2 != '\0')
+	{
+		str[i] = *s2;
+		s2++;
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }

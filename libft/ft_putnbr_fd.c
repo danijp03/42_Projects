@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/26 22:58:01 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/25 20:49:04 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/09/25 21:00:43 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <unistd.h>
 
-char	*ft_strchr(const char *s, int c)
+void	ft_putnbr_fd(int n, int fd)
 {
-	while (*s != '\0')
+	char	c;
+
+	c = '0';
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	if (n < 0 && n != -2147483648)
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		write(fd, "-", 1);
+		n = -n;
 	}
-	if (c == '\0')
-		return ((char *)s);
-	return (NULL);
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	c = ((n % 10) + '0');
+	write(fd, &c, 1);
 }

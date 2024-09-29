@@ -6,20 +6,20 @@
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 19:59:50 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/17 20:17:16 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/09/25 22:34:03 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-void	*ft_memcpy(char	*dest, const char *src, size_t n)
+void	*ft_memcpy(void	*dest, const void *src, size_t n)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < n && (src[i] != '\0' && dest[i] != '\0'))
+	while (i < n)
 	{
-		dest[i] = src[i];
+		((unsigned char *)dest)[i] = ((const unsigned char *)src)[i];
 		i++;
 	}
 	return (dest);

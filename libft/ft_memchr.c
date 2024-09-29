@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/26 22:58:01 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/20 23:06:51 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/09/27 13:13:06 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-char	*ft_strchr(const char *s, int c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	while (*s != '\0')
+	size_t			i;
+	unsigned char	*aux;
+
+	aux = (unsigned char *)s;
+	i = 0;
+	while (aux[i] != '\0' && i < n)
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		if ((unsigned char )c == aux[i])
+			return ((void *)&aux[i]);
+		i++;
 	}
-	if (c == '\0')
-		return ((char *)s);
 	return (NULL);
 }

@@ -1,26 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/26 22:58:01 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/23 20:59:42 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/09/23 21:23:04 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
+#include <stdlib.h>
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strlen(const char *s)
 {
-	while (*s != '\0')
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*arr;
+	int		i;
+
+	i = 0;
+	arr = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (arr == NULL)
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		arr = malloc(1);
+		return (arr);
 	}
-	if (c == '\0')
-		return ((char *)s);
-	return (NULL);
+	while (s[i] != '\0')
+	{
+		arr[i] = s[i];
+		i++;
+	}
+	arr[i] = '\0';
+	return (arr);
 }

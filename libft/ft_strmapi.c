@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/26 22:58:01 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/25 19:20:53 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/09/25 20:04:41 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include <stdlib.h>
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strlen(const char	*s)
 {
-	while (*s != '\0')
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	char	*str;
+	int		size;
+	int		i;
+
+	i = 0;
+	size = ft_strlen(s);
+	str = malloc((size + 1) * sizeof(char));
+	while (i < size)
 	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	if (c == '\0')
-		return ((char *)s);
-	return (NULL);
+	return (str);
 }

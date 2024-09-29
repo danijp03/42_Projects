@@ -6,15 +6,13 @@
 /*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 19:43:45 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/17 19:39:54 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/09/22 21:44:24 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 void	*ft_memset(char *s, int c, unsigned int n)
 {
 	unsigned int	i;
-	unsigned char	ch;
 
-	ch = c;
 	i = 0;
 	while (i < n && s[i] != '\0')
 	{
