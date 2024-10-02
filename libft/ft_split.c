@@ -6,7 +6,7 @@
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:48:19 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/29 21:36:22 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/01 22:35:32 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,44 @@ int	count_words(char const *s, char c)
 {
 	int	i;
 	int	words;
-	int	in_word;
 
 	i = 0;
 	words = 0;
-	in_word = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] != c && !in_word)
-		{
+		if (s[i] != c && (i == 0 || s[i - 1] == c))
 			words++;
-			in_word = 1;
-		}
-		else if (s[i] == c)
-			in_word = 0;
 		i++;
 	}
 	return (words);
 }
 
-int	word_length(char const *s, char c, int start)
+int	word_length(char const *s, char c, int i)
 {
 	int	len;
 
 	len = 0;
-	while (s[start] != c && s[start] != '\0')
+	while (s[i] != '\0' && s[i] != c)
 	{
 		len++;
-		start++;
+		i++;
 	}
 	return (len);
 }
 
-char	**allocate_memory(char const *s, char c)
+void	free_mem(char **arr, int i)
 {
+	while (i-- > 0)
+		free(arr[i]);
+	free(arr);
+}
+
+char	**allocate_memory(char const *s, char c, int word_count)
+{
+	char	**arr;
 	int		i;
 	int		j;
-	int		word_count;
-	char	**arr;
 
-	word_count = count_words(s, c);
 	arr = malloc((word_count + 1) * sizeof(char *));
 	if (arr == NULL)
 		return (NULL);
@@ -67,7 +65,10 @@ char	**allocate_memory(char const *s, char c)
 			j++;
 		arr[i] = malloc((word_length(s, c, j) + 1) * sizeof(char));
 		if (arr[i] == NULL)
+		{
+			free_mem(arr, i);
 			return (NULL);
+		}
 		j += word_length(s, c, j);
 		i++;
 	}
@@ -75,38 +76,31 @@ char	**allocate_memory(char const *s, char c)
 	return (arr);
 }
 
-void	fill_array(char **arr, char const *s, char c)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	k = 0;
-	while (s[k] != '\0')
-	{
-		while (s[k] == c)
-			k++;
-		if (s[k] != '\0')
-		{
-			j = 0;
-			while (s[k] != c && s[k] != '\0')
-				arr[i][j++] = s[k++];
-			arr[i][j] = '\0';
-			i++;
-		}
-	}
-}
-
 char	**ft_split(char const *s, char c)
 {
 	char	**arr;
+	int		word_count;
+	int		i;
+	int		j;
+	int		k;
 
-	if (!s)
+	if (s == NULL)
 		return (NULL);
-	arr = allocate_memory(s, c);
+	word_count = count_words(s, c);
+	arr = allocate_memory(s, c, word_count);
 	if (arr == NULL)
 		return (NULL);
-	fill_array(arr, s, c);
+	i = 0;
+	k = 0;
+	while (i < word_count)
+	{
+		while (s[k] == c)
+			k++;
+		j = 0;
+		while (s[k] != c && s[k] != '\0')
+			arr[i][j++] = s[k++];
+		arr[i][j] = '\0';
+		i++;
+	}
 	return (arr);
 }

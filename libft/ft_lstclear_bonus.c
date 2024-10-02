@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/01 20:51:38 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/30 23:59:22 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/10/01 00:07:16 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	unsigned char	uc;
+	t_list	*cabeza;
+	t_list	*next;
 
-	uc = (unsigned char)c;
-	while (*s != '\0')
+	cabeza = *lst;
+	while (cabeza != NULL)
 	{
-		if (*s == uc)
-			return ((char *)s);
-		s++;
+		next = cabeza->next;
+		ft_lstdelone(cabeza, del);
+		cabeza = next;
 	}
-	if (uc == '\0')
-		return ((char *)s);
-	return (NULL);
+	*lst = NULL;
+	free(*lst);
 }

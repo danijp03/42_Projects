@@ -6,13 +6,15 @@
 /*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:26:56 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/16 18:47:33 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:29:58 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlen(const char *s)
+#include "libft.h"
+
+size_t	ft_strlen(const char *s)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i] != '\0')

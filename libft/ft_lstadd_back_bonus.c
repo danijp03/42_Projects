@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/01 20:51:38 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/30 23:29:38 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/10/01 00:19:21 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	unsigned char	uc;
+	t_list	*cabeza;
 
-	uc = (unsigned char)c;
-	while (*s != '\0')
+	cabeza = *lst;
+	if (lst == NULL || new == NULL)
+		return ;
+	if (*lst == NULL)
 	{
-		if (*s == uc)
-			return ((char *)s);
-		s++;
+		*lst = new;
+		return ;
 	}
-	if (uc == '\0')
-		return ((char *)s);
-	return (NULL);
+	while (cabeza->next != NULL)
+		cabeza = cabeza->next;
+	cabeza->next = new;
 }
