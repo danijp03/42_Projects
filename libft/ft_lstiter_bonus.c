@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/01 20:51:38 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/10/01 00:08:41 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/10/01 00:11:09 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	unsigned char	uc;
+	t_list	*cabeza;
 
-	uc = (unsigned char)c;
-	while (*s != '\0')
+	cabeza = lst;
+	while (cabeza != NULL)
 	{
-		if (*s == uc)
-			return ((char *)s);
-		s++;
+		f(cabeza->content);
+		cabeza = cabeza->next;
 	}
-	if (uc == '\0')
-		return ((char *)s);
-	return (NULL);
 }

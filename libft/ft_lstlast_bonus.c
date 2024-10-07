@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 21:23:29 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/01 20:51:38 by dajose-p         ###   ########.fr       */
+/*   Created: 2024/09/30 18:27:38 by dajose-p          #+#    #+#             */
+/*   Updated: 2024/09/30 23:28:46 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+t_list	*ft_lstlast(t_list *lst)
 {
-	unsigned char	uc;
+	t_list	*cabeza;
 
-	uc = (unsigned char)c;
-	while (*s != '\0')
-	{
-		if (*s == uc)
-			return ((char *)s);
-		s++;
-	}
-	if (uc == '\0')
-		return ((char *)s);
-	return (NULL);
+	if (lst == NULL)
+		return (NULL);
+	cabeza = lst;
+	while ((cabeza->next) != NULL)
+		cabeza = cabeza->next;
+	return (cabeza);
 }

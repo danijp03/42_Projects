@@ -6,7 +6,7 @@
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 18:46:08 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/29 22:50:37 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/01 22:38:28 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,60 +29,25 @@ int	nbr_len(int n)
 	return (i);
 }
 
-void	rev_arr(char *arr)
+void	*fill_array(char *arr, size_t size, int n_aux, int n)
 {
-	char	tmp;
-	int		i;
-	int		size;
-
-	i = 0;
-	size = ft_strlen(arr);
-	while (i < (size / 2))
+	while (size > 0)
 	{
-		tmp = arr[i];
-		arr[i] = arr[size - 1 - i];
-		arr[size - 1 - i] = tmp;
-		i++;
+		arr[size - 1] = (n_aux % 10) + '0';
+		n_aux = n_aux / 10;
+		size--;
 	}
-}
-
-char	*tr_ints(int size, int n, int neg, char *arr)
-{
-	int	op;
-	int	i;
-	
-	op = 0;
-	i = 0;
-	if (neg != 0)
-		size = size - 1;
-	while (i < size)
-	{
-		op = n % 10;
-		n = n / 10;
-		arr[i] = op + '0';
-		i++;
-	}
-	if (neg != 0)
-			arr[i++] = '-';
-	arr[i] = '\0';
+	if (n < 0)
+		arr[size] = '-';
 	return (arr);
 }
 
-char	*last_neg(char *arr)
+static void	*mem_alloc(char *arr, size_t len)
 {
-	arr = malloc (12 * sizeof(char));
-		arr[0] = '-';
-		arr[1] = '2';
-		arr[2] = '1';
-		arr[3] = '4';
-		arr[4] = '7';
-		arr[5] = '4';
-		arr[6] = '8';
-		arr[7] = '3';
-		arr[8] = '6';
-		arr[9] = '4';
-		arr[10] = '8';
-		arr[11] = '\0';
+	arr = malloc((len + 1) * sizeof(char));
+	if (arr == NULL)
+		return (NULL);
+	else
 		return (arr);
 }
 
@@ -90,33 +55,21 @@ char	*ft_itoa(int n)
 {
 	char	*arr;
 	int		size;
-	int		neg;
+	int		n_aux;
 
+	n_aux = n;
 	arr = NULL;
 	size = nbr_len(n);
 	if (n == -2147483648)
-	{	
-		arr = last_neg(arr);
-		return (arr);
-	}
+		return (ft_strdup("-2147483648"));
 	if (n == 0)
-	{
-		arr = malloc(2 * sizeof(char));
-		if (arr == NULL)
-			return (NULL);
-		arr[0] = '0';
-		arr[1] = '\0';
-		return (arr);
-	}
-	if (n < 0)
-	{
-		neg = 1;
-		n = -n;
-	}
-	arr = malloc((size + 1) * sizeof(char));
+		return (ft_strdup("0"));
+	arr = mem_alloc(arr, size);
 	if (arr == NULL)
 		return (NULL);
-	arr = tr_ints(size, n, neg, arr);
-	rev_arr(arr);
+	if (n < 0)
+		n_aux = -n_aux;
+	arr[size] = '\0';
+	arr = fill_array(arr, size, n_aux, n);
 	return (arr);
 }

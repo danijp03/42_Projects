@@ -6,30 +6,23 @@
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 20:48:04 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/09/27 17:04:02 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/02 18:19:05 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*arr;
-	size_t	i;
 
-	i = 0;
 	if (nmemb == 0 || size == 0)
-		return (NULL);
-	if ((int)nmemb * (int)size > 2147483647)
+		return (malloc(0));
+	if (nmemb > SIZE_MAX / size)
 		return (NULL);
 	arr = malloc(nmemb * size);
 	if (arr == NULL)
 		return (NULL);
-	while (i < nmemb)
-	{
-		((unsigned char *)arr)[i] = 0;
-		i++;
-	}
+	ft_bzero(arr, nmemb * size);
 	return (arr);
 }
