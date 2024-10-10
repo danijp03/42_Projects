@@ -6,7 +6,7 @@
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:08:24 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/06 20:03:48 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/08 21:26:50 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -17,10 +17,14 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-int	step_in_buffer(char *buffer);
-int	strlen_r(char	*str);
-int	strlen_l(char	*str);
-char	*ft_strdup_r(char *str, int len);
-char	*ft_strdup_l(char *str, int len);
+char    *ft_strdup(const char *s);
+int     ft_strlen(const char *str);
+int     step_at_the_end(char *buffer);
+int     step_in_buffer(char *buffer);
+int     strlen_antesdelsalto(char *str);
+int     strlen_despuesdelsalto(char *str);
+char    *ft_strdup_antesdelsalto(char *str, int len);
+char    *ft_strdup_despuesdelsalto(char *str, int len);
+char    *ft_strjoin(char const *s1, char const *s2);
 
 #endif
