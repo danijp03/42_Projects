@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+<<<<<<< HEAD
+=======
+#define BUFFER_SIZE 6776
+>>>>>>> 4b0337df341a9ce6162436f86e091890ec4e38be
 #include "get_next_line.h"
 
 
@@ -27,13 +31,17 @@ char	*get_next_line(int fd)
 	static int	last_read;
 	char	*tmp;
 
+<<<<<<< HEAD
 	i = 0;
+=======
+>>>>>>> 4b0337df341a9ce6162436f86e091890ec4e38be
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		last_read = bytes_read;
 		full_buff = ft_strdup(buffer);
 	}
+<<<<<<< HEAD
 	else if (bytes_read == 0 && *aux_buffer != '\0')
 	{
 		ft_bzero(buffer, BUFFER_SIZE);		
@@ -53,6 +61,15 @@ char	*get_next_line(int fd)
 			aux_buffer = ft_strdup("");
 		if (step_in_buffer(full_buff) >= 1 && aux_buffer != NULL)
 		{
+=======
+	while (full_buff != NULL)
+	{
+		full_buff[last_read] = '\0';
+		if (aux_buffer == NULL)
+			aux_buffer = ft_strdup("");
+		if (step_in_buffer(full_buff) >= 1 && aux_buffer != NULL)
+		{
+>>>>>>> 4b0337df341a9ce6162436f86e091890ec4e38be
 			len_buffer2 = strlen_antesdelsalto(full_buff);
 			buffer_2 = ft_strdup_antesdelsalto(full_buff, len_buffer2);
 			len_buffer3 = strlen_despuesdelsalto(full_buff);

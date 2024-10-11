@@ -51,6 +51,24 @@ char	*del_step(char *buff)
 	return (buff);
 }
 
+<<<<<<< HEAD
+=======
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned char	uc;
+
+	uc = (unsigned char)c;
+	while (*s != '\0')
+	{
+		if (*s == uc)
+			return ((char *)s);
+		s++;
+	}
+	if (uc == '\0')
+		return ((char *)s);
+	return (NULL);
+}
+>>>>>>> 4b0337df341a9ce6162436f86e091890ec4e38be
 
 int	step_at_the_end(char *buffer)
 {
