@@ -6,13 +6,13 @@
 /*   By: dajose-p <dajose-p@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:51:15 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/06 20:04:05 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/08 21:27:19 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#define BUFFER_SIZE 53453
 #include "get_next_line.h"
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -22,13 +22,45 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+char	*ft_strdup(const char *s)
+{
+	char	*arr;
+	int		i;
+
+	i = 0;
+	arr = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (arr == NULL)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		arr[i] = s[i];
+		i++;
+	}
+	arr[i] = '\0';
+	return (arr);
+}
+
+char	*del_step(char *buff)
+{
+	int	i;
+
+	i = 0;
+	while (buff[i] != '\n')
+		i++;
+	buff[i] = '\0';
+	return (buff);
+}
+
+
 int	step_at_the_end(char *buffer)
 {
 	int	i;
 
 	i = 0;
+	if (step_in_buffer(buffer) > 1)
+		return (0);
 	while (buffer[i] != '\0')
-		i++;
+		i++; 
 	if (buffer[i - 1] == '\n')
 		return (1);
 	else
@@ -38,23 +70,19 @@ int	step_at_the_end(char *buffer)
 int	step_in_buffer(char *buffer)
 {
 	int	i;
+	int	count;
 
 	i = 0;
-	if (step_at_the_end == 0)
-		return (0);
-	else
-	{
-		while (buffer[i] != '\0')
+	count = 0;
+	while (buffer[i] != '\0')
 		{
 			if (buffer[i] == '\n')
-				return (1);
+					count++;
 			i++;	
 		}
-		return (0);
-	}
+	return (count);
 }
-
-int	strlen_antesdelsalto(char	*str)
+int	strlen_antesdelsalto(char *str)
 {
 	int	i;
 
@@ -65,7 +93,7 @@ int	strlen_antesdelsalto(char	*str)
 	return (i);
 }
 
-int	strlen_despuesdelsalto(char	*str)
+int	strlen_despuesdelsalto(char *str)
 {
 	int	i;
 	int	j;
@@ -119,6 +147,18 @@ char	*ft_strdup_despuesdelsalto(char *str, int len)
 	}
 	res[j] = '\0';
 	return (res); 
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)s)[i] = '\0';
+		i++;
+	}
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
