@@ -6,7 +6,7 @@
 /*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:05:07 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/15 13:30:15 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:32:08 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ char	*get_next_line(int fd)
 			return (res);
 		}
 	}
+	return (NULL);
 }

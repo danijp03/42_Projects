@@ -6,7 +6,7 @@
 /*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 11:55:17 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/15 13:23:51 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:32:28 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	main(void)
 {
 	int	fd;
 	char	*buff;
-
+	
+	buff = NULL;
 	fd = open("text.txt", O_RDONLY);
 	while (buff != NULL)
 	{
