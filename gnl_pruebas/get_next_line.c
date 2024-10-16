@@ -6,7 +6,7 @@
 /*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:05:07 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/16 19:14:47 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:20:31 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*get_next_line(int fd)
 {
 	char	*buffer;
 	char	*res;
+	static char	**sep_big;
 	static char	*join;
 	int	bytesleidos;
 	int	i;
@@ -45,5 +46,19 @@ char	*get_next_line(int fd)
 			return (res);
 		}
 	}
+	if (bytesleidos == 0)
+	{	
+		if (!sep_big)
+			sep_big = ft_split(join, '\n');
+		res = *sep_big;
+		i = 0;
+		while (res[i] != '\0')
+			i++;
+		res[i++] = '\n';
+		res[i] = '\0';
+		sep_big++;
+		return (res);
+	}
+
 	return (NULL);
 }

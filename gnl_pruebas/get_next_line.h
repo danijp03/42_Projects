@@ -6,7 +6,7 @@
 /*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:12:39 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/15 12:41:34 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/16 19:54:45 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	*ft_memcpy(void *dest, void *src, size_t n);
 int	ft_strlen_sp(char *str);
 int	step_in_buff(char *str);
 char	*ft_strjoin(char *s1, char *s2);
+char    **ft_split(char const *s, char c);
 
 #endif
