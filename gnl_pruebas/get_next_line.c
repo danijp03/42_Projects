@@ -6,17 +6,33 @@
 /*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:05:07 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/16 20:42:03 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/20 13:24:10 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+char	*big_next_line(char *join, char	*res)
+{
+	int	i;
+
+	i = 0;
+	while (*join != '\n')
+	{
+		res[i] = *join;
+		join++;
+		i++;
+	}
+	join++;
+	res[i++] = '\n';
+	res[i] = '\0';
+	return (join);
+}
+
 char	*get_next_line(int fd)
 {
 	char	*buffer;
 	char	*res;
-	static char	**sep_big;
 	static char	*join;
 	int	bytesleidos;
 	int	i;
@@ -46,19 +62,19 @@ char	*get_next_line(int fd)
 			return (res);
 		}
 	}
-	if (bytesleidos == 0)
-	{	
-		if (!sep_big)
-			sep_big = ft_split(join, '\n');
-		res = *sep_big;
-		if (res != NULL)
+	if (bytesleidos == 0 && *join != '\0')
+	{
+		if (*join == '\n')
 		{
-			i = 0;
-			while (res[i] != '\0')
-				i++;
-			res[i++] = '\n';
-			res[i] = '\0';
-			sep_big++;
+			res = malloc(1);
+			res[0] = join[0];
+			join++;
+			return (res);
+		}
+		else
+		{
+			res = malloc((ft_strlen_sp(join) + 1) * sizeof(char));
+			join = big_next_line(join, res);
 			return (res);
 		}
 	}
