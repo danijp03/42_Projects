@@ -6,27 +6,29 @@
 /*   By: dajose-p <dajose-p@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 20:05:07 by dajose-p          #+#    #+#             */
-/*   Updated: 2024/10/20 13:24:10 by dajose-p         ###   ########.fr       */
+/*   Updated: 2024/10/20 20:08:09 by dajose-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*big_next_line(char *join, char	*res)
+char	*next_line(char *join, char *res)
 {
 	int	i;
 
 	i = 0;
-	while (*join != '\n')
+	while (join[i] != '\n' && join[i] != '\0')
 	{
-		res[i] = *join;
-		join++;
+		res[i] = join[i];
 		i++;
 	}
-	join++;
-	res[i++] = '\n';
+	if (join[i] == '\n')
+	{
+		res[i] = '\n';
+		i++;
+	}
 	res[i] = '\0';
-	return (join);
+	return (join + i);
 }
 
 char	*get_next_line(int fd)
@@ -35,48 +37,52 @@ char	*get_next_line(int fd)
 	char	*res;
 	static char	*join;
 	int	bytesleidos;
-	int	i;
+	char	*tmp;
 
 	if (!join)
 		join = ft_strdup("");
+	if (!join)
+		return (NULL);
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);	
 	while ((bytesleidos = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[bytesleidos] = '\0';
+		tmp = join;
 		join = ft_strjoin(join, buffer);
+		free(tmp);
+		if (!join)
+		{
+			free(buffer);
+			return (NULL);
+		}
 		if (step_in_buff(join) >= 1)
 		{
-			i = 0;
 			res = malloc((ft_strlen_sp(join) + 1) * sizeof(char));
-			while (*join != '\n')
+			if (!res)
 			{
-				res[i] = *join;
-				i++;
-				join++;
+				free(buffer);
+				return (NULL);
 			}
-			join++;
-			res[i++] = '\n';
-			res[i] = '\0';
+			join = next_line(join, res);
+			free(buffer);
 			return (res);
 		}
 	}
+	free(buffer);
 	if (bytesleidos == 0 && *join != '\0')
 	{
-		if (*join == '\n')
+		res = malloc((ft_strlen_sp(join) + 1) * sizeof(char));
+		if (!res)
 		{
-			res = malloc(1);
-			res[0] = join[0];
-			join++;
-			return (res);
+			free(join);
+			join = NULL;
+			return (NULL);
 		}
-		else
-		{
-			res = malloc((ft_strlen_sp(join) + 1) * sizeof(char));
-			join = big_next_line(join, res);
-			return (res);
-		}
+		join = next_line(join, res);
+		return (res);
 	}
+	free(join);
 	return (NULL);
 }
